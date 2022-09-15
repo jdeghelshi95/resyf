@@ -4,13 +4,36 @@ import { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Nav from "./components/Nav";
 import Home from "./pages/Home";
+import Categories from "./pages/Categories";
+import Cars from "./pages/types/Cars";
+import Rentals from "./pages/types/Rentals";
+import Activity from "./pages/types/Activities";
+import  Login  from "./pages/Login"
+import Signup from "./pages/Signup"
+import IndividualListing from "./components/IndividualListing";
+import Form from "./components/Form.jsx"
 
 function App() {
-  return (
+  fetch("http://localhost:2002/api/reservable-items/").then(resp => resp.json()).then(json => console.log(json))
+  return (//
     <div>
-      {/* <Nav/> */}
+      <Nav/>
       <Routes>
         <Route path="/" element={<Home/>} />
+        <Route path="/categories" element={<Categories/>}/>
+        <Route path="/categories/activities" element={<Activity/>}/>
+        <Route path="/categories/cars" element={<Cars/>}/>
+        <Route path="/categories/rentals" element={<Rentals/>}/>
+        <Route path="/listing/:id" element={<IndividualListing/>} />
+        <Route path="/reserve/:id" element={<Form/>} />
+        <Route path="/signin" element={<Login/>}/>
+        <Route path="/signup" element={<Signup/>}/>
+
+
+
+
+
+
       </Routes>
     </div>
   );

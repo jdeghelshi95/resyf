@@ -1,4 +1,8 @@
-
+.main-sky{
+  background-image: url(https://media1.giphy.com/media/AN43eq5EhiQrOyJ8HC/giphy.gif?cid=790b76118a7e44c93d12de2108a2cc0c63a016282b88fb26&rid=giphy.gif&ct=g);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .App {
   text-align: center;
 }
