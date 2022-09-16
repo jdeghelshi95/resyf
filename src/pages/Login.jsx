@@ -1,8 +1,34 @@
 
 import { LockClosedIcon } from '@heroicons/react/20/solid'
-import { Login } from 'heroicons-react'
+import { useState } from 'react'
 
-export default function Example() {
+export default function Login() {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState()
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(email, password)
+
+    fetch('http://localhost:2002/api-token-auth/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        password,
+        username: email
+    })
+  }).then(response => {
+    if (response.ok) {
+      response.json().then(data => {
+        localStorage.setItem('token', data.token)
+        window.location = '/reservations'
+      })
+    }
+  })
+}
+
   return (
     <>
 
@@ -21,7 +47,7 @@ export default function Example() {
              
             </p>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST" onSubmit={ e => Login(e) }>
+          <form className="mt-8 space-y-6" action="#" method="POST" onSubmit={(e) => handleSubmit(e)}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
@@ -36,6 +62,8 @@ export default function Example() {
                   required
                   className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   placeholder="Email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value) }
                 />
               </div>
               <div>
@@ -50,6 +78,8 @@ export default function Example() {
                   required
                   className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </div>

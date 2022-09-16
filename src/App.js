@@ -11,8 +11,9 @@ import Activity from "./pages/types/Activities";
 import  Login  from "./pages/Login"
 import Signup from "./pages/Signup"
 import IndividualListing from "./components/IndividualListing";
-import Form from "./components/Form.jsx"
-
+import Form from "./components/ReservationForm.jsx"
+import Reservations from "./pages/Reservations";
+import Footer from "./components/Footer"
 function App() {
   fetch("http://localhost:2002/api/reservable-items/").then(resp => resp.json()).then(json => console.log(json))
   return (//
@@ -28,13 +29,9 @@ function App() {
         <Route path="/reserve/:id" element={<Form/>} />
         <Route path="/signin" element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
-
-
-
-
-
-
+        <Route path="/reservations" element={<Reservations/>}/>
       </Routes>
+      <Footer className="object-bottom"/>
     </div>
   );
 }

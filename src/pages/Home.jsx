@@ -38,10 +38,26 @@ export default function Home() {
 
   return (
     <div className='main-sky w-full height-full'>
+        <div className="relative bg-indigo-800">
+      <div className="absolute inset-0">
+        <img
+          className="h-full w-full object-cover"
+          src="https://media3.giphy.com/media/AN43eq5EhiQrOyJ8HC/giphy.gif"
+          alt=""
+        />
+        <div className="absolute inset-0 bg-orange-600 mix-blend-multiply" aria-hidden="true" />
+      </div>
+      <div className="relative mx-auto max-w-7xl py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
+        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">Resy-App</h1>
+        <p className="mt-6 max-w-3xl text-xl text-indigo-100">
+          an App that Connects you directly with locals to help make it easier for you and locals to have a great experiance!
+        </p>
+      </div>
+    </div>
     <div className="bg-white py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
-          <h2 className="text-lg font-semibold text-orange-400">Transactions</h2>
+          <h2 className="text-lg font-semibold text-orange-400">Reserve Now</h2>
           <p className="mt-2 text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
             An Easier way to Travel and Connect with Locals
           </p>
