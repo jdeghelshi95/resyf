@@ -27,7 +27,7 @@ const InListing = () => {
 
   useEffect(() => {
     if (!fetched) {
-      fetch(`http://localhost:2002/api/reservable-items/${id}`)
+      fetch(`https://seahorse-app-469qs.ondigitalocean.app/api/reservable-items/${id}`)
         .then((resp) => resp.json())
         .then((json) => {
           setData(json);
@@ -42,7 +42,7 @@ const InListing = () => {
   });
 
   const createReservation = (id) => {
-    fetch("http://localhost:2002/api/reservations/", {
+    fetch("https://seahorse-app-469qs.ondigitalocean.app/api/reservations/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

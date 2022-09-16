@@ -13,7 +13,7 @@ export default function Signup() {
     e.preventDefault();
     console.log(email, password)
 
-    fetch('http://localhost:2002/api/register/', {
+    fetch('https://seahorse-app-469qs.ondigitalocean.app/api/register/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -15,7 +15,7 @@ import Form from "./components/ReservationForm.jsx"
 import Reservations from "./pages/Reservations";
 import Footer from "./components/Footer"
 function App() {
-  fetch("http://localhost:2002/api/reservable-items/").then(resp => resp.json()).then(json => console.log(json))
+  fetch("https://seahorse-app-469qs.ondigitalocean.app/api/reservable-items/").then(resp => resp.json()).then(json => console.log(json))
   return (//
     <div>
       <Nav/>

@@ -9,7 +9,7 @@ const Reservations = () => {
   const [reservations, setData] = useState()
 
   useEffect(() => {
-    fetch('http://localhost:2002/api/reservations/', {
+    fetch('https://seahorse-app-469qs.ondigitalocean.app/api/reservations/', {
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + token

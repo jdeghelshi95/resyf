@@ -27,7 +27,7 @@ export default function Home() {
    useEffect ( () =>  {
    
     if(! fetched) {
-      fetch("http://localhost:2002/api/reservable-items/").then(resp => resp.json()
+      fetch("https://seahorse-app-469qs.ondigitalocean.app/api/reservable-items/").then(resp => resp.json()
       ).then(json => {
         setData(json)
         setFetched(true)

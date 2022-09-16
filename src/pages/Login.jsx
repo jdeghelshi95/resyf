@@ -10,7 +10,7 @@ export default function Login() {
     e.preventDefault();
     console.log(email, password)
 
-    fetch('http://localhost:2002/api-token-auth/', {
+    fetch('https://seahorse-app-469qs.ondigitalocean.app/api-token-auth/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

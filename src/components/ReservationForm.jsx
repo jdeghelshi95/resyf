@@ -28,7 +28,7 @@ export default function ReservationForm() {
     e.preventDefault();
     console.log(start_date, end_date);
 
-    fetch("http://localhost:2002/api/reservations", {
+    fetch("https://seahorse-app-469qs.ondigitalocean.app/api/reservations", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
