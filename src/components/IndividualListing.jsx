@@ -3,24 +3,29 @@ import { useParams } from "react-router-dom";
 import ImageGallery from "react-image-gallery";
 import ReactLoading from 'react-loading';
 
+import "react-image-gallery/styles/css/image-gallery.css";
+
+const imagesTest = [
+  {
+    original: 'https://picsum.photos/id/1018/1000/600/',
+    thumbnail: 'https://picsum.photos/id/1018/250/150/',
+  },
+  {
+    original: 'https://picsum.photos/id/1015/1000/600/',
+    thumbnail: 'https://picsum.photos/id/1015/250/150/',
+  },
+  {
+    original: 'https://picsum.photos/id/1019/1000/600/',
+    thumbnail: 'https://picsum.photos/id/1019/250/150/',
+  },
+];
+
+
 const InListing = () => {
   const [item, setData] = useState(null);
   const [fetched, setFetched] = useState(false);
 
-  // const images = [
-  //   {
-  //     original: 'https://picsum.photos/id/1018/1000/600/',
-  //     thumbnail: 'https://picsum.photos/id/1018/250/150/',
-  //   },
-  //   {
-  //     original: 'https://picsum.photos/id/1015/1000/600/',
-  //     thumbnail: 'https://picsum.photos/id/1015/250/150/',
-  //   },
-  //   {
-  //     original: 'https://picsum.photos/id/1019/1000/600/',
-  //     thumbnail: 'https://picsum.photos/id/1019/250/150/',
-  //   },
-  // ];
+  
   const [images, setImages] = useState([]);
 
   let { id } = useParams();
@@ -39,7 +44,7 @@ const InListing = () => {
           setImages(imgs);
         });
     }
-  });
+  }, [fetched, id]);
 
   const createReservation = (id) => {
     fetch("https://seahorse-app-469qs.ondigitalocean.app/api/reservations/", {
@@ -74,7 +79,7 @@ const InListing = () => {
               <p>{item.is_available} </p>
               <div className="flex justify-center p-2">
                 {/* <ImageGallery items={images} /> */}
-                {item.media.map((media) => {
+                {/*item.media.map((media) => {
                   return (
                     <img
                       className="w-3/4 mix-blend-normal"
@@ -83,8 +88,10 @@ const InListing = () => {
                       alt={media.description}
                     />
                   );
-                })}
+                })*/}
+                <ImageGallery items={images} showThumbnails={false} showPlayButton={false} />;
               </div>
+
               {/* item Data */}
               <div className="flex justify-center">
                 <div className="w-3/4">

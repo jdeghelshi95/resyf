@@ -1,3 +1,4 @@
+import { data } from 'autoprefixer'
 import React, { useEffect, useState } from 'react'
 
 const Reservations = () => {
@@ -29,6 +30,23 @@ const Reservations = () => {
           {reservations.map((reservation) =>  (
             <div className="bg-black w-1/3">
             
+
+            <div>
+            {/* {data.map((reservation) => (
+            {reservation.reservation_item.map((pics)  => (
+                pics.media.map((plink) => {
+                  if (plink.is_cover){
+                    return <img src={plink.file} alt={plink.description} />;
+                   }else {
+                    return null;
+                   }
+
+                }
+            )))}`
+          ))} */}
+
+            </div>
+
             <h2 className='text-white'>
               {reservation.id}
             </h2>

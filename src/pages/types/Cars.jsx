@@ -22,7 +22,9 @@ const Rentals = () => {
   };
   useEffect(() => {
     if (!fetched) {
-      fetch("https://seahorse-app-469qs.ondigitalocean.app/api/reservable-items/?type=car")
+      fetch(
+        "https://seahorse-app-469qs.ondigitalocean.app/api/reservable-items/?type=car"
+      )
         .then((resp) => resp.json())
         .then((json) => {
           setData(json);
@@ -33,30 +35,34 @@ const Rentals = () => {
   });
   return (
     <div className="w-full h-full ">
-      <CarBanner/>
+      <CarBanner />
       <div className=" w-full h-200 flex flex-wrap p-6 ">
         {data.map((item) => (
           <>
             <div className="text-white text-center w-1/3  bg-orange-500 p-4 m-2 rounded-l drop-shadow">
-               <a href={"/listing/" + item.id}>
-                  <div className="bg-white text-black text-3xl">
+              <a href={"/listing/" + item.id}>
+                <div className="bg-white text-black text-3xl">
                   <h1>
-                  {item.id}: {item.name}
+                    {item.id}: {item.name}
                   </h1>
-                  </div>
-                  { item.media.map(media => {
-                    if(media.is_cover) {
-                      return <img src={media.file} alt={media.description}/>
-
-                    }
-                    else {
-                      return null
-                    }
-                  }) }
-                </a>
-              <div className="bg-white text-black text-2xl">{item.description}</div>
-              <div>{item.host.first_name} {item.host.last_name}</div>
-              <div className="p-2 text-4xl">Daily Rate: ${item.base_price}.00</div>
+                </div>
+                {item.media.map((media) => {
+                  if (media.is_cover) {
+                    return <img src={media.file} alt={media.description} />;
+                  } else {
+                    return null;
+                  }
+                })}
+              </a>
+              <div className="bg-white text-black text-2xl">
+                {item.description}
+              </div>
+              <div>
+                {item.host.first_name} {item.host.last_name}
+              </div>
+              <div className="p-2 text-4xl">
+                Daily Rate: ${item.base_price}.00
+              </div>
               <button
                 key={item.id}
                 href={"/listing/" + item.id}
