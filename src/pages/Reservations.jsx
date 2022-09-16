@@ -1,4 +1,5 @@
 import { data } from 'autoprefixer'
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
 const Reservations = () => {
@@ -23,6 +24,19 @@ const Reservations = () => {
     })
   }, [])
   console.log(reservations)
+
+  const getCoverImage = (media) => {
+    const coverImage = media.find(img => img.is_cover);
+    return coverImage ? <img src={coverImage.file} alt={coverImage.description} /> : null
+  }
+
+  const deleteReservation = (reservation) => {
+    axios.delete(`https://seahorse-app-469qs.ondigitalocean.app/api/reservations/${reservation.id}`)
+    .then((res) => {
+      console.log(res)
+    })
+  }
+
   return (
     <div className='w-full flex justify-center p-4 '>
       {reservations && reservations.length ? (
@@ -32,19 +46,7 @@ const Reservations = () => {
             
 
             <div>
-            {/* {data.map((reservation) => (
-            {reservation.reservation_item.map((pics)  => (
-                pics.media.map((plink) => {
-                  if (plink.is_cover){
-                    return <img src={plink.file} alt={plink.description} />;
-                   }else {
-                    return null;
-                   }
-
-                }
-            )))}`
-          ))} */}
-
+            {getCoverImage(reservation.reservation_item.media)}
             </div>
 
             <h2 className='text-white'>
@@ -56,6 +58,9 @@ const Reservations = () => {
             </h3>
             <h3 className='text-white'>
              End Date: {reservation.end_date}
+            </h3>
+            <h3 className='text-white'>
+              <button className='text-white' type='button' onClick={() => deleteReservation(reservation)}>Delete</button>
             </h3>
             </div>
       ))}
