@@ -3,6 +3,12 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.husky-stare{
+  background-image: url(https://media3.giphy.com/media/1Wck8KNfOn4ydBjbKX/giphy.gif?cid=790b76111e8ab14b2d34aaadaba25d34a7a8278758b327a8&rid=giphy.gif&ct=g);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .App {
   text-align: center;
 }

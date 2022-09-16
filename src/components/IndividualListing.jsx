@@ -1,83 +1,122 @@
-import React, {useState, useEffect} from 'react'
-import { useParams } from 'react-router-dom'
-import ImageGallery from 'react-image-gallery'
-
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import ImageGallery from "react-image-gallery";
+import ReactLoading from 'react-loading';
 
 const InListing = () => {
-    const [item, setData] = useState(null)
-    const [fetched, setFetched] = useState(false)
-    
-// const images = [
-//   {
-//     original: 'https://picsum.photos/id/1018/1000/600/',
-//     thumbnail: 'https://picsum.photos/id/1018/250/150/',
-//   },
-//   {
-//     original: 'https://picsum.photos/id/1015/1000/600/',
-//     thumbnail: 'https://picsum.photos/id/1015/250/150/',
-//   },
-//   {
-//     original: 'https://picsum.photos/id/1019/1000/600/',
-//     thumbnail: 'https://picsum.photos/id/1019/250/150/',
-//   },
-// ];
-    const [images, setImages] = useState([])
+  const [item, setData] = useState(null);
+  const [fetched, setFetched] = useState(false);
 
-    let {id} = useParams();
-    
-    useEffect ( () =>  {
-    
-        if(! fetched) {
-          fetch(`http://localhost:2002/api/reservable-items/${id}`).then(resp => resp.json()
-          ).then(json => {
-            setData(json)
-            let imgs = json.media.map(img => { return {'original': img.file, 'thumbnail': img.file} })
-            console.log(imgs)
-            setFetched(true)
-           setImages(imgs)
-            
-          })
-        }
-      })
+  // const images = [
+  //   {
+  //     original: 'https://picsum.photos/id/1018/1000/600/',
+  //     thumbnail: 'https://picsum.photos/id/1018/250/150/',
+  //   },
+  //   {
+  //     original: 'https://picsum.photos/id/1015/1000/600/',
+  //     thumbnail: 'https://picsum.photos/id/1015/250/150/',
+  //   },
+  //   {
+  //     original: 'https://picsum.photos/id/1019/1000/600/',
+  //     thumbnail: 'https://picsum.photos/id/1019/250/150/',
+  //   },
+  // ];
+  const [images, setImages] = useState([]);
 
-      const createReservation = (id) => {
-        fetch('http://localhost:2002/api/reservations/',
-         {method: 'POST', headers: {'Content-Type': 'application/json'},
-          body: 
-          JSON.stringify(
-            {
-                "id": 2,
-                "start_date": "2022-09-15T13:02:00Z",
-                "end_date": "2022-09-01T13:02:00Z",
-                "status": "requested",
-                "reservation_item": 5,
-                "reservation_user": 2
-            })
-        }
-          ).then(resp => resp.json()).then(json => console.log('done'))
+  let { id } = useParams();
+
+  useEffect(() => {
+    if (!fetched) {
+      fetch(`http://localhost:2002/api/reservable-items/${id}`)
+        .then((resp) => resp.json())
+        .then((json) => {
+          setData(json);
+          let imgs = json.media.map((img) => {
+            return { original: img.file, thumbnail: img.file };
+          });
+          console.log(imgs);
+          setFetched(true);
+          setImages(imgs);
+        });
     }
+  });
 
+  const createReservation = (id) => {
+    fetch("http://localhost:2002/api/reservations/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: 2,
+        start_date: "2022-09-15T13:02:00Z",
+        end_date: "2022-09-01T13:02:00Z",
+        status: "requested",
+        reservation_item: 5,
+        reservation_user: 2,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((json) => console.log("done"));
+  };
 
-    if(item) {
-      return (<div onClick={ () => createReservation(item.id)} key={item.id}>
-            <p>{item.id } : { item.name }</p>
-            <p>{item.description}</p>
-            <p>{item.host.first_name} {item.host.last_name}</p>
-            <p>{item.base_price}</p>
-            <p>{item.is_available} </p>
-            <a href={ "/reserve/" + id}>Reserve</a>
-            { item.media.map(media => {
-                    return <img key={media.id}  src={media.file} alt={media.description}/>
+  if (item) {
+    return (
+      <div className=" husky-stare">
+        <div className="flex justify-center " aria-hidden="true">
+          <div className="bg-orange-400 bg-opacity-90  w-1/2 h-full text-center p-2 ">
+            <div
+              classname=" flex justify-center w-full bg-red-400"
+              onClick={() => createReservation(item.id)}
+              key={item.id}
+            >
+              <p>
+                {item.host.first_name} {item.host.last_name}
+              </p>
+              <p>{item.is_available} </p>
+              <div className="flex justify-center p-2">
+                {/* <ImageGallery items={images} /> */}
+                {item.media.map((media) => {
+                  return (
+                    <img
+                      className="w-3/4 mix-blend-normal"
+                      key={media.id}
+                      src={media.file}
+                      alt={media.description}
+                    />
+                  );
+                })}
+              </div>
+              {/* item Data */}
+              <div className="flex justify-center">
+                <div className="w-3/4">
+                  <div className="bg-white  ">
+                    <p>
+                      {item.id} : {item.name}
+                    </p>
+                  </div>
+                  <div className="bg-white  h-fit">
+                    <p>{item.description}</p>
+                  </div>
+                  <div className="bg-white">
+                    <p>{item.base_price}</p>
+                  </div>
+                </div>
+              </div>
+              {/* reserve button */}
+              <div className="p-2">
+                <button className="  p-2 btn btn-primary text-white shadow-lg bg-red-400 hover:bg-orange-700 hover:text-white hover:shadow-xl rounded-xl">
+                  <a className="text-2xl " href={"/reserve/" + id}>
+                    Reserve
+                  </a>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  } else {
+    return "Loading...";
+  }
+};
 
-                  }) }
-           {/* <ImageGallery items={images} /> */}
-          </div>)
-    
-        
-    }
-    else {
-      return 'NOthing yet'
-    }
-}
-
-export default InListing
+export default InListing;
