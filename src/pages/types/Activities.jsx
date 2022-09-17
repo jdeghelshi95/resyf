@@ -22,7 +22,7 @@ const Activities = () => {
   };
   useEffect(() => {
     if (!fetched) {
-      fetch("https://seahorse-app-469qs.ondigitalocean.app/?type=activity")
+      fetch("https://seahorse-app-469qs.ondigitalocean.app/api/reservable-items/?type=activity")
         .then((resp) => resp.json())
         .then((json) => {
           setData(json);
