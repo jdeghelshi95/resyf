@@ -38,7 +38,7 @@ const Reservations = () => {
     })
     .then((res) => {
       console.log(res)
-    })
+    })``
   }
 
   return (
@@ -46,9 +46,10 @@ const Reservations = () => {
       {reservations && reservations.length ? (
         <>
           {reservations.map((reservation) =>  (
-            <div className="bg-black w-1/3">
+            <div className=" w-1/3 m-2">
             
-
+            <div className='bg-orange-400 text-center p-4  w-full'>
+            <div className="flex-center bg-gray-500 bg-opacity-80">
             <div>
             {getCoverImage(reservation.reservation_item.media)}
             </div>
@@ -64,8 +65,10 @@ const Reservations = () => {
              End Date: {reservation.end_date}
             </h3>
             <h3 className='text-white'>
-              <button className='text-white' type='button' onClick={() => deleteReservation(reservation)}>Delete</button>
+              <button className='text-black bg-white p-2 rounded-xl hover:bg-orange-700 hover:text-white' type='button' onClick={() => deleteReservation(reservation)}>Delete</button>
             </h3>
+            </div>
+            </div>
             </div>
       ))}
         </>
