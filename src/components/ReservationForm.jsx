@@ -81,16 +81,17 @@ export default function ReservationForm() {
     });*/
 
     axios.post(
-      "https://seahorse-app-469qs.ondigitalocean.app/api/reservations",
+      "https://seahorse-app-469qs.ondigitalocean.app/api/reservations/",
+      // "http://locahost:2002/api/reservations/",
       {
         start_date,
         end_date,
         reservation_item: id,
-        reservation_user,
+        reservation_user: 1,
       },
       {
         headers: {
-          'Authorization': localStorage.getItem("token"),
+          'Authorization': 'Bearer ' + localStorage.getItem("token"),
         }
       }
     )
@@ -166,9 +167,9 @@ export default function ReservationForm() {
               <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                 <button
                   type="submit"
-                  className="w-full rounded-md border border-transparent bg-indigo-600 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                  className="w-full rounded-md border border-transparent bg-orange-400 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                 >
-                  Confirm order
+                  Confirm Reservation
                 </button>
               </div>
             </div>

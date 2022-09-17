@@ -31,7 +31,11 @@ const Reservations = () => {
   }
 
   const deleteReservation = (reservation) => {
-    axios.delete(`https://seahorse-app-469qs.ondigitalocean.app/api/reservations/${reservation.id}`)
+    axios.delete(`https://seahorse-app-469qs.ondigitalocean.app/api/reservations/${reservation.id}`, {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
     .then((res) => {
       console.log(res)
     })

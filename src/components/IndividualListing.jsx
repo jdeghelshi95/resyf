@@ -29,6 +29,7 @@ const InListing = () => {
   const [images, setImages] = useState([]);
 
   let { id } = useParams();
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
     if (!fetched) {
@@ -49,7 +50,7 @@ const InListing = () => {
   const createReservation = (id) => {
     fetch("https://seahorse-app-469qs.ondigitalocean.app/api/reservations/", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", 'Authorization': 'Bearer ' + token },
       body: JSON.stringify({
         id: 2,
         start_date: "2022-09-15T13:02:00Z",
@@ -73,9 +74,13 @@ const InListing = () => {
               onClick={() => createReservation(item.id)}
               key={item.id}
             >
+            <div className="flex justify-center">
+            <div className="w-3/4">
+            <div className="bg-white text-black p-2 text-2xl">
               <p>
                 {item.host.first_name} {item.host.last_name}
               </p>
+            </div>
               <p>{item.is_available} </p>
               <div className="flex justify-center p-2">
                 {/* <ImageGallery items={images} /> */}
@@ -89,13 +94,15 @@ const InListing = () => {
                     />
                   );
                 })*/}
-                <ImageGallery items={images} showThumbnails={false} showPlayButton={false} />;
+                </div>
+                <ImageGallery items={images} showThumbnails={false} showPlayButton={false} />
+              </div>
               </div>
 
               {/* item Data */}
               <div className="flex justify-center">
                 <div className="w-3/4">
-                  <div className="bg-white  ">
+                  <div className="bg-white">
                     <p>
                       {item.id} : {item.name}
                     </p>
